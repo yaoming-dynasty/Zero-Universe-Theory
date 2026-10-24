@@ -2,9 +2,13 @@ name: "Z0 Cryptographic Verification Protocol"
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches:
+      - main
+      - master
   pull_request:
-    branches: [ "main", "master" ]
+    branches:
+      - main
+      - master
 
 jobs:
   verify-signatures:
@@ -75,10 +79,13 @@ jobs:
             engine = Z0SignatureEngine()
             failed_files = []
             
-            # Target documentation and structural parameters to audit
+            # Audit both root folder markdown assets and /docs assets
             for root, dirs, files in os.walk("."):
+                # Skip hidden directories like .github or .git
+                if any(part.startswith('.') for part in root.split(os.sep)):
+                    continue
                 for file in files:
-                    if file.endswith(".md") and file != "README.md" and "LICENSE" not in file:
+                    if file.endswith(".md") and file.lower() != "readme.md" and file.lower() != "license.md" and file.lower() != "index.md":
                         file_path = os.path.join(root, file)
                         print(f"Auditing boundary state for: {file_path}")
                         if not engine.verify_file(file_path):
