@@ -1,0 +1,83 @@
+# .gitignore for Z0 Cryptographic Vault
+
+# === Z0 System Exceptions ===
+# Never ignore the verification engine config, license, or documentation
+!.gitignore
+!README.md
+!LICENSE
+!verify_engine.py
+
+# === Python Build Artifacts ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Cryptographic Safety / Private Keys ===
+# Never allow private keys or key seeds to be committed to the public ledger
+*private*
+*secret*
+*.pem
+*.key
+*.priv
+.env
+.envrc
+
+# === Operating System Garbage ===
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.lnk
+*.cab
+[Dd]ownload/
+$RECYCLE.BIN/
+System Volume Information/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.trash/
+.nfs*
+
+# === IDEs and Text Editors ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
