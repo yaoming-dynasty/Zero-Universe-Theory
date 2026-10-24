@@ -1,0 +1,65 @@
+name: Convert Math Syntax for GitHub
+
+on:
+  push:
+    branches:
+      - main # Change to 'master' if your default branch is master
+    paths:
+      - '**.md'
+
+permissions:
+  contents: write
+
+jobs:
+  format-math:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Math Conversion Script
+        run: |
+          python3 - << 'EOF'
+          import glob
+
+          def convert_content(content):
+              # Example conversion rules for alternative delimiters (like \( \) or \[ \] to $ and $$)
+              # Adjust these replacements based on the exact syntax your files use:
+              
+              # Replace block \[ ... \] with $$ ... $$
+              # (Using a simple replace or regex depending on your needs)
+              import re
+              
+              # Convert \[ ... \] to $$ ... $$
+              content = re.sub(r'\\\[(.*?)\\\]', r'$$\n\1\n$$', content, flags=re.DOTALL)
+              
+              # Convert \( ... \) to $ ... $
+              content = re.sub(r'\\\((.*?)\\\)', r'$\1$', content, flags=re.DOTALL)
+              
+              return content
+
+          # Find all markdown files recursively
+          for filepath in glob.glob('**/*.md', recursive=True):
+              if '.github' in filepath:
+                  continue
+              with open(filepath, 'r', encoding='utf-8') as f:
+                  original = f.read()
+              
+              updated = convert_content(original)
+              
+              if original != updated:
+                  with open(filepath, 'w', encoding='utf-8') as f:
+                      f.write(updated)
+                  print(f"Converted math syntax in: {filepath}")
+          EOF
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-format math syntax for GitHub compatibility"
+          branch: main
