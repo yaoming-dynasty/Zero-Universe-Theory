@@ -1,0 +1,41 @@
+name: Bash Script Quality & Security Audit
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  audit-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository Assets
+      uses: actions/checkout@v4
+
+    - name: Run ShellCheck Linting Engine
+      uses: ludeeus/action-shellcheck@master
+      env:
+        SHELLCHECK_OPTS: -e SC2086 -e SC2154  # Optional: Exclude specific warning codes if needed
+      with:
+        # This will automatically find and audit all files ending in .sh
+        scandir: '.'
+        file_glob: '*.sh'
+
+    - name: Verify Execution Permissions
+      run: |
+        echo "Checking that all shell scripts have proper executable permissions..."
+        failed=0
+        while IFS= read -r file; do
+          if [ ! -x "$file" ]; then
+            echo "[X] Permission Error: $file is not marked as executable."
+            failed=1
+          fi
+        done < <(find . -type f -name "*.sh" -not -path "*/.*")
+        
+        if [ "$failed" -eq 1 ]; then
+          echo "Run 'chmod +x <script_name>.sh' locally to fix executable bits."
+          exit 1
+        fi
+        echo "[✓] All execution bits validated perfectly."
