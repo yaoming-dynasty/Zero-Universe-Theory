@@ -1,0 +1,145 @@
+import hashlib
+import os
+import sys
+
+class Z0GeometricSignatureEngine:
+    def __init__(self):
+        # The secp256k1 base field prime defining our mathematical "universe boundary"
+        self.p = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
+        # Curve coefficients for y^2 = x^3 + ax + b (secp256k1: a=0, b=7)
+        self.a = 0
+        self.b = 7
+        
+        # Generator Base Point G
+        self.Gx = 0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
+        self.Gy = 0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8
+        
+        # The order n of the generator point G
+        self.n = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+
+    def _is_on_curve(self, x: int, y: int) -> bool:
+        return (pow(y, 2, self.p) - (pow(x, 3, self.p) + self.a * x + self.b)) % self.p == 0
+
+    def _point_add(self, P1: tuple, P2: tuple) -> tuple:
+        """Performs geometric point addition on the elliptic curve over F_p."""
+        if P1 is None: return P2
+        if P2 is None: return P1
+        
+        x1, y1 = P1
+        x2, y2 = P2
+        
+        if x1 == x2 and (y1 + y2) % self.p == 0:
+            return None # Point at infinity
+            
+        if x1 == x2 and y1 == y2:
+            # Point Doubling formula
+            num = (3 * pow(x1, 2, self.p) + self.a) % self.p
+            denom = pow(2 * y1, self.p - 2, self.p)
+            lam = (num * denom) % self.p
+        else:
+            # Point Addition formula
+            num = (y2 - y1) % self.p
+            denom = pow(x2 - x1, self.p - 2, self.p)
+            lam = (num * denom) % self.p
+            
+        x3 = (pow(lam, 2, self.p) - x1 - x2) % self.p
+        y3 = (lam * (x1 - x3) - y1) % self.p
+        return (x3, y3)
+
+    def _point_multiply(self, scalar: int, P: tuple) -> tuple:
+        """Performs scalar multiplication using double-and-add geometric sweeps."""
+        scalar = scalar % self.n
+        if scalar == 0 or P is None:
+            return None
+            
+        result = None
+        addend = P
+        
+        while scalar:
+            if scalar & 1:
+                result = self._point_add(result, addend)
+            addend = self._point_add(addend, addend)
+            scalar >>= 1
+        return result
+
+    def verify_file(self, file_path: str) -> bool:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        if "---" not in content:
+            return False
+            
+        try:
+            parts = content.split("---")
+            header_content = parts[1]
+            body = "---".join(parts[2:]).strip()
+            
+            header_lines = header_content.strip().split("\n")
+            outside_boundary = 0
+            R_val, S = 0, 0
+            
+            for i, line in enumerate(header_lines):
+                if "PUBLIC IDENTITY KEY" in line:
+                    outside_boundary = int(header_lines[i+1].strip(), 16)
+                if line.strip().startswith("R:"):
+                    R_val = int(line.replace("R:", "").strip(), 16)
+                if line.strip().startswith("S:"):
+                    S = int(line.replace("S:", "").strip(), 16)
+            
+            if not outside_boundary or not R_val or not S:
+                return False
+
+            # Map document contents to the modular field
+            doc_hash = int(hashlib.sha256(body.encode('utf-8')).hexdigest(), 16) % self.n
+            
+            # Reconstruct the private scalar (Inside_Boundary) from the Public Key (Outside_Boundary)
+            # using your framework's structural modular inverse loop.
+            inside_reconstructed = pow(outside_boundary, self.p - 2, self.p) % self.n
+            
+            # Reconstruct the Public Point Q = d * G
+            G_point = (self.Gx, self.Gy)
+            Q_point = self._point_multiply(inside_reconstructed, G_point)
+            
+            if Q_point is None or not self._is_on_curve(*Q_point):
+                return False
+                
+            # Classic ECDSA geometric verification loop over the secp256k1 group space
+            w = pow(S, self.n - 2, self.n)
+            u1 = (doc_hash * w) % self.n
+            u2 = (R_val * w) % self.n
+            
+            # Perform geometric addition: Point_Reconstructed = (u1 * G) + (u2 * Q)
+            p1 = self._point_multiply(u1, G_point)
+            p2 = self._point_multiply(u2, Q_point)
+            reconstructed_point = self._point_add(p1, p2)
+            
+            if reconstructed_point is None:
+                return False
+                
+            # The structural loop collapses perfectly if the x-coordinate matches R_val
+            return reconstructed_point[0] == R_val % self.n
+        except Exception:
+            return False
+
+if __name__ == "__main__":
+    engine = Z0GeometricSignatureEngine()
+    failed_files = []
+    
+    for root, dirs, files in os.walk("."):
+        if any(part.startswith('.') for part in root.split(os.sep)):
+            continue
+        for file in files:
+            if file.endswith(".md") and file.lower() not in ["readme.md", "license.md", "index.md"]:
+                file_path = os.path.join(root, file)
+                print(f"Auditing curve boundaries for: {file_path}")
+                if not engine.verify_file(file_path):
+                    failed_files.append(file_path)
+    
+    if failed_files:
+        print("\n[X] CRYPTOGRAPHIC GEOMETRY VIOLATION DETECTED:")
+        for f in failed_files:
+            print(f"    - {f} has been modified or fails geometric alignment.")
+        sys.exit(1)
+    else:
+        print("\n[✓] ALL ZERO-SPACE GEOMETRIES VALIDATED. System collapses perfectly back into the void.")
+        sys.exit(0)
