@@ -1,14 +1,4 @@
-name: "Z0 Cryptographic Verification Protocol"
-
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+{name: "Z0 Cryptographic Verification Protocol", on: {push: {branches: [main, master]}, pull_request: {branches: [main, master]}}}
 
 jobs:
   verify-signatures:
@@ -79,9 +69,7 @@ jobs:
             engine = Z0SignatureEngine()
             failed_files = []
             
-            # Audit both root folder markdown assets and /docs assets
             for root, dirs, files in os.walk("."):
-                # Skip hidden directories like .github or .git
                 if any(part.startswith('.') for part in root.split(os.sep)):
                     continue
                 for file in files:
