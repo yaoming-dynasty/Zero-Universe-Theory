@@ -1,0 +1,18 @@
+name: Verify Z0 Signatures
+on:
+  push:
+    paths: ['docs/**.md']
+  pull_request:
+    paths: ['docs/**.md']
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: |
+          for f in docs/*.md; do
+            if [ "$(basename "$f")" = "INDEX.md" ]; then continue; fi
+            python scripts/verify.py "$f" || exit 1
+          done
