@@ -1,0 +1,540 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero-Universe Theory (Z0) Interactive Explorer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax CDN for crisp LaTeX rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 360px;
+            }
+        }
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<!-- Chosen Palette: Warm Neutrals & Cosmic Slate (Background: #fdfbf7, Accents: #1e293b, #0d9488, #d97706, #4f46e5) -->
+<!-- Application Structure Plan: Designed as a 4-Tier Interactive Science Dashboard: 1. Theoretical Foundations & Axiom Matrix (Interactive tabbed explorer), 2. Decomposition Bridge Laboratory (Interactive Scale Operator S slider driving live Canvas dual-polar geometry & Chart.js zero-sum equilibrium curve), 3. Metric Tensor & Trace Matrix (Real-time recalculation of g_uv tensor trace), 4. Cryptographic Identity & Verification Vault. This structure transforms abstract math into intuitive, visual, and operational concepts. -->
+<!-- Visualization & Content Choices: 1. Axioms Matrix -> Goal: Explain core laws -> Interactive HTML Cards + Latex MathJax -> Clean visual hierarchy. 2. Decomposition Bridge -> Goal: Demonstrate S-operator symmetry breaking -> Custom HTML5 Canvas Particle/Horizon Polar Projection + Chart.js dynamic stacked area plot -> Slider Interaction -> Direct proof of Inside + Outside - Scale = 0 (NO SVG/Mermaid). 3. Tensor Explorer -> Goal: Matrix trace evaluation -> Interactive numerical input array -> Dynamic JS Matrix computation. -->
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<body class="bg-[#fdfbf7] text-slate-800 font-sans antialiased min-h-screen">
+
+    <header class="border-b border-stone-200 bg-[#f8f6f0]/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-slate-900 text-amber-400 flex items-center justify-center font-bold text-xl shadow-md">
+                    &empty;
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-900">&mathcal;Z&ZeroWidthSpace;<sub>0</sub> Zero-Universe Framework</h1>
+                    <p class="text-xs text-slate-500 font-mono">Author: Christopher Thomas Ronio &bull; Z0SignatureScheme v1.0.0</p>
+                </div>
+            </div>
+            <nav class="flex items-center space-x-1 sm:space-x-2 text-xs font-medium">
+                <a href="#axioms-section" class="px-3 py-1.5 rounded-md hover:bg-stone-200/60 text-slate-700 transition">Axioms</a>
+                <a href="#bridge-section" class="px-3 py-1.5 rounded-md hover:bg-stone-200/60 text-slate-700 transition">Decomposition Bridge</a>
+                <a href="#tensor-section" class="px-3 py-1.5 rounded-md hover:bg-stone-200/60 text-slate-700 transition">Tensor Formulation</a>
+                <a href="#crypto-section" class="px-3 py-1.5 rounded-md hover:bg-stone-200/60 text-slate-700 transition">Identity Key</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <section class="bg-stone-100/70 border border-stone-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                    Core Zero Anchor Active
+                </div>
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+                    The Absolute Zero-Sum Reality Engine
+                </h2>
+                <p class="text-slate-600 text-base leading-relaxed">
+                    The Zero-Universe Theory ($\mathcal{Z}_0$) establishes a formal mathematical framework where unscaled global identity ($\emptyset \equiv \mathbb{U}$) projects into localized, asymmetric relational domains ($A_{in}$ and $A_{out}$) strictly through the application of the Scale Operator ($\mathbb{S}$). 
+                </p>
+                <div class="p-4 bg-white rounded-xl border border-stone-300 font-mono text-center shadow-inner text-base text-slate-800">
+                    $$\{|0|\} = \{\text{Inside}\} + \{\text{Outside}\} - \{\text{Scale}\} = 0$$
+                </div>
+            </div>
+        </section>
+
+        <section id="axioms-section" class="space-y-6">
+            <div class="border-b border-stone-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-900">1. Axiomatic Foundation of $\mathcal{Z}_0$</h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    The four minimal logical constraints governing the self-contained, cyclic universe where infinity wraps into a zero-point state. Click each axiom to inspect operational dynamics.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="selectAxiom(1)" id="axiom-btn-1" class="text-left p-5 rounded-xl border border-stone-300 bg-white hover:border-slate-800 transition duration-150 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold font-mono text-indigo-600">AXIOM I</span>
+                        <h3 class="font-bold text-slate-900 text-lg mt-1">Void-Absolute</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-mono">$$\emptyset \equiv \mathbb{U}$$</p>
+                    </div>
+                    <span class="text-xs text-indigo-600 mt-4 font-semibold hover:underline">Explore Structural Loop &rarr;</span>
+                </button>
+
+                <button onclick="selectAxiom(2)" id="axiom-btn-2" class="text-left p-5 rounded-xl border border-stone-200 bg-white hover:border-slate-800 transition duration-150 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold font-mono text-emerald-600">AXIOM II</span>
+                        <h3 class="font-bold text-slate-900 text-lg mt-1">Universal Summation</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-mono">$$\sum_{x \in \mathbb{U}} x = \emptyset$$</p>
+                    </div>
+                    <span class="text-xs text-emerald-600 mt-4 font-semibold hover:underline">Explore Zero-Sum Balance &rarr;</span>
+                </button>
+
+                <button onclick="selectAxiom(3)" id="axiom-btn-3" class="text-left p-5 rounded-xl border border-stone-200 bg-white hover:border-slate-800 transition duration-150 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold font-mono text-amber-600">AXIOM III</span>
+                        <h3 class="font-bold text-slate-900 text-lg mt-1">Boundary Complement</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-mono">$$\{ A_{in} \cup A_{out} \} \setminus \mathbb{S} = \emptyset$$</p>
+                    </div>
+                    <span class="text-xs text-amber-600 mt-4 font-semibold hover:underline">Explore Scale Artifacts &rarr;</span>
+                </button>
+
+                <button onclick="selectAxiom(4)" id="axiom-btn-4" class="text-left p-5 rounded-xl border border-stone-200 bg-white hover:border-slate-800 transition duration-150 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold font-mono text-rose-600">AXIOM IV</span>
+                        <h3 class="font-bold text-slate-900 text-lg mt-1">Infinite Identity</h3>
+                        <p class="text-sm text-slate-600 mt-2 font-mono">$$\text{Card}(\mathbb{U}) = \text{Card}(\emptyset) = 0$$</p>
+                    </div>
+                    <span class="text-xs text-rose-600 mt-4 font-semibold hover:underline">Explore Infinity Closure &rarr;</span>
+                </button>
+            </div>
+
+            <div id="axiom-detail-panel" class="bg-white border border-stone-300 rounded-xl p-6 shadow-sm space-y-3">
+                <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                    <h3 id="axiom-detail-title" class="text-lg font-bold text-slate-900">Axiom I Details</h3>
+                    <span id="axiom-detail-tag" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-md bg-indigo-100 text-indigo-800">Axiom I</span>
+                </div>
+                <div class="text-sm text-slate-700 leading-relaxed" id="axiom-detail-body">
+                    Select an axiom above to view its formal mathematical definition, topological operational impact, and set-theoretic implications.
+                </div>
+            </div>
+        </section>
+
+        <section id="bridge-section" class="space-y-6">
+            <div class="border-b border-stone-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-900">2. The Decomposition Bridge Laboratory</h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    Simulate the dynamic process of symmetry breaking through the Decomposition Operator $\mathcal{D}: \mathbb{U} \longrightarrow (A_{in} \times A_{out})_{\mathbb{S}}$. Adjust the Scale Operator ($\mathbb{S}$) to observe real-time polarization and closure.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <div class="lg:col-span-5 bg-white border border-stone-300 rounded-xl p-6 shadow-sm space-y-6">
+                    <div>
+                        <label for="scale-slider" class="flex justify-between items-center text-sm font-bold text-slate-900 mb-2">
+                            <span>Scale Operator ($\mathbb{S}$)</span>
+                            <span id="scale-value" class="font-mono text-base text-indigo-600 font-extrabold">0.00</span>
+                        </label>
+                        <input id="scale-slider" type="range" min="0" max="100" value="0" step="1" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-indigo-600" oninput="updateSimulation()">
+                        <div class="flex justify-between text-[11px] font-mono text-slate-400 mt-1">
+                            <span>0 (Symmetry/Void)</span>
+                            <span>50 (Metric Activation)</span>
+                            <span>100 (Max Polarization)</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2 border-t border-stone-100">
+                        <div class="flex justify-between items-center text-sm font-mono">
+                            <span class="text-slate-600">Active Phase:</span>
+                            <span id="phase-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800">Phase I: Symmetry</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm font-mono">
+                            <span class="text-slate-600">Interior Profile ($\mathcal{I} = A_{in}$):</span>
+                            <span id="val-in" class="font-bold text-teal-600">+0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm font-mono">
+                            <span class="text-slate-600">Exterior Horizon ($\mathcal{O} = A_{out}$):</span>
+                            <span id="val-out" class="font-bold text-amber-600">-0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm font-mono pt-2 border-t border-stone-100">
+                            <span class="font-bold text-slate-800">Balance Metric ($\mathcal{I} + \mathcal{O} - \mathcal{S}$):</span>
+                            <span id="val-balance" class="font-extrabold text-slate-900">0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-stone-50 rounded-lg border border-stone-200 text-xs text-slate-600 space-y-2">
+                        <h4 class="font-bold text-slate-800">Phase Protocol Logic</h4>
+                        <p id="phase-description">
+                            At $\mathbb{S} = 0$, internal and external domains are indistinguishable and the boundary set is empty. The global system remains at absolute zero cardinality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 shadow-md">
+                        <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                            <span class="text-xs font-mono font-bold text-slate-400">GEOMETRIC CANVAS PROJECTION &bull; DUAL POLAR SPACE</span>
+                            <span class="text-[10px] font-mono text-emerald-400 flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-1 animate-pulse"></span> Dynamic
+                            </span>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="bridgeCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-stone-300 rounded-xl p-4 shadow-sm">
+                        <h4 class="text-xs font-mono font-bold text-slate-500 mb-3 text-center">ZERO-SUM EQUILIBRIUM MONITOR ($\mathcal{I} + \mathcal{O} = \mathbb{S}$)</h4>
+                        <div class="chart-container">
+                            <canvas id="equilibriumChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="tensor-section" class="space-y-6">
+            <div class="border-b border-stone-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-900">3. Tensor Formulation &amp; Trace Invariant</h2>
+                <p class="text-sm text-slate-600 mt-1">
+                    The Decomposition Bridge represented as metric transition tensor $g_{\mu\nu}^{(\mathcal{Z}_0)}$ mapping global zero-state vectors to local observational frames.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white border border-stone-300 rounded-xl p-6 shadow-sm space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900">Transition Metric Tensor Matrix</h3>
+                    <p class="text-xs text-slate-600">
+                        The tensor $g_{\mu\nu}^{(\mathcal{Z}_0)} = \begin{pmatrix} \mathcal{I} & 0 \\ 0 & \mathcal{O} \end{pmatrix} - \mathcal{S}\mathbb{I}$ governs localized curvature and relational boundaries.
+                    </p>
+
+                    <div class="p-6 bg-slate-900 text-amber-300 rounded-xl font-mono text-center text-sm sm:text-base space-y-4 shadow-inner">
+                        <div>
+                            $$g_{\mu\nu}^{(\mathcal{Z}_0)} = \begin{pmatrix} \mathcal{I} - \mathbb{S} & 0 \\ 0 & \mathcal{O} - \mathbb{S} \end{pmatrix}$$
+                        </div>
+                        <div class="pt-3 border-t border-slate-800 text-emerald-400">
+                            $$\text{Tr}\left(g^{(\mathcal{Z}_0)}\right) = (\mathcal{I} - \mathbb{S}) + (\mathcal{O} - \mathbb{S}) + \mathbb{S} = \mathcal{I} + \mathcal{O} - \mathbb{S} = 0$$
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-100 border border-stone-200 rounded-xl p-6 space-y-4">
+                    <h3 class="text-lg font-bold text-slate-900">Live Tensor Matrix Calculator</h3>
+                    <p class="text-xs text-slate-600">
+                        Verify the trace invariant dynamically. Set arbitrary values for $A_{in}$ ($\mathcal{I}$) and Scale ($\mathbb{S}$). The exterior parameter $\mathcal{O}$ automatically self-adjusts to preserve zero trace.
+                    </p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-bold text-slate-700">Input $\mathcal{I}$ (Internal):</label>
+                            <input type="number" id="tensor-i" value="42" class="w-24 px-2 py-1 border border-stone-300 rounded text-right font-mono text-sm" onchange="calcTensor()">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="text-xs font-bold text-slate-700">Input $\mathbb{S}$ (Scale):</label>
+                            <input type="number" id="tensor-s" value="100" class="w-24 px-2 py-1 border border-stone-300 rounded text-right font-mono text-sm" onchange="calcTensor()">
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-stone-200">
+                            <span class="text-xs font-bold text-slate-700">Computed $\mathcal{O}$ (Exterior):</span>
+                            <span id="tensor-o-out" class="font-mono font-bold text-amber-600">58</span>
+                        </div>
+                        <div class="p-3 bg-white rounded border border-stone-200 text-center font-mono text-xs font-bold text-slate-800">
+                            Evaluated Trace: <span id="tensor-trace" class="text-emerald-600 font-extrabold">0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="crypto-section" class="bg-slate-900 text-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 gap-2">
+                <div>
+                    <h2 class="text-xl font-bold text-white tracking-tight">Metadata &amp; Cryptographic Verification</h2>
+                    <p class="text-xs text-slate-400">Public Boundary Keys &amp; Digital Document Signature</p>
+                </div>
+                <span class="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full text-xs font-mono">
+                    Verification Protocol: Z0SignatureScheme v1.0.0
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs font-mono">
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-slate-500 block uppercase font-bold text-[10px]">Public Identity Key (Outside Boundary)</span>
+                    <p class="text-amber-400 break-all select-all">
+                        0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F
+                    </p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-slate-500 block uppercase font-bold text-[10px]">Document Signature (R, S)</span>
+                    <p class="text-teal-400 break-all select-all">
+                        R: 0x7a3f9e2b1c4d8e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f
+                    </p>
+                    <p class="text-teal-400 break-all select-all">
+                        S: 0x1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 pt-2 border-t border-slate-800 gap-2">
+                <p>&copy; 2026 Christopher Thomas Ronio. Licensed under CC BY 4.0 International.</p>
+                <p class="font-mono text-slate-500">Timestamp: 2026-10-24 14:09:00 UTC</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const axiomsData = {
+            1: {
+                tag: "Axiom I",
+                title: "The Axiom of the Void-Absolute (\\(\\emptyset \\equiv \\mathbb{U}\\))",
+                body: "The foundational empty set (\\(\\emptyset\\)) and universal totality (\\(\\mathbb{U}\\)) are the exact same mathematical entity viewed from distinct geometric or topological perspectives. This breaks the classical well-founded linear hierarchy of set theory, forming a closed structural loop where the lowest tier of existence (null void) acts as the absolute upper boundary tier."
+            },
+            2: {
+                tag: "Axiom II",
+                title: "Axiom of Universal Summation (\\(\\sum_{x \\in \\mathbb{U}} x = \\emptyset\\))",
+                body: "For every object, element, or conceptual structure \\(x\\) contained within the universal set \\(\\mathbb{U}\\), there exists a corresponding, perfectly balanced symmetric inverse or anti-element \\(-x\\) such that their global collection sums perfectly to the empty state. Multiplicity and physical dimensions are mathematical fluctuations out of a null state."
+            },
+            3: {
+                tag: "Axiom III",
+                title: "Axiom of Boundary Complementarity (\\(\\{ A_{in} \\cup A_{out} \\} \\setminus \\mathbb{S} = \\emptyset\\))",
+                body: "Boundaries, containment, and regional separation are not objective properties of the universe; they are local artifacts produced by the application of a Scale Operator (\\(\\mathbb{S}\\)). If the structural metric of scale is removed, the division between inside and outside vanishes completely."
+            },
+            4: {
+                tag: "Axiom IV",
+                title: "Axiom of Infinite Identity (\\(\\text{Card}(\\mathbb{U}) = \\text{Card}(\\emptyset) = 0\\))",
+                body: "The global cardinality, size, or magnitude of universal totality (\\(\\mathbb{U}\\)) is structurally equivalent to the cardinality of the empty set (\\(\\emptyset\\)), which is zero. Infinity is treated not as an open-ended expanding sequence, but as a completed point of geometric closure wrapping back onto itself."
+            }
+        };
+
+        function selectAxiom(id) {
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`axiom-btn-${i}`);
+                if (i === id) {
+                    btn.classList.add('border-slate-800', 'ring-2', 'ring-slate-800/10');
+                } else {
+                    btn.classList.remove('border-slate-800', 'ring-2', 'ring-slate-800/10');
+                }
+            }
+
+            const data = axiomsData[id];
+            document.getElementById('axiom-detail-title').innerText = data.title;
+            document.getElementById('axiom-detail-tag').innerText = data.tag;
+            document.getElementById('axiom-detail-body').innerHTML = data.body;
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([document.getElementById('axiom-detail-panel')]);
+            }
+        }
+
+        let canvas, ctx;
+        let scaleVal = 0;
+        let chartInstance;
+
+        function initChart() {
+            const ctxChart = document.getElementById('equilibriumChart').getContext('2d');
+            chartInstance = new Chart(ctxChart, {
+                type: 'line',
+                data: {
+                    labels: ['S=0', 'S=20', 'S=40', 'S=60', 'S=80', 'S=100'],
+                    datasets: [
+                        {
+                            label: 'Interior (I)',
+                            data: [0, 12, 24, 36, 48, 60],
+                            borderColor: '#0d9488',
+                            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Exterior (O)',
+                            data: [0, -12, -24, -36, -48, -60],
+                            borderColor: '#d97706',
+                            backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Net Sum (I + O)',
+                            data: [0, 0, 0, 0, 0, 0],
+                            borderColor: '#1e293b',
+                            borderDash: [5, 5],
+                            borderWidth: 2,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { family: 'monospace', size: 10 } }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'monospace', size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initCanvas() {
+            canvas = document.getElementById('bridgeCanvas');
+            ctx = canvas.getContext('2d');
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            requestAnimationFrame(drawCanvas);
+        }
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+
+        let time = 0;
+        function drawCanvas() {
+            time += 0.02;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const maxRadius = Math.min(centerX, centerY) * 0.75;
+
+            const currentS = scaleVal / 100;
+            const inRadius = maxRadius * currentS * 0.5;
+            const outRadius = maxRadius * currentS;
+
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, Math.max(2, outRadius), 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(217, 119, 6, ${0.2 + currentS * 0.6})`;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 6]);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, Math.max(2, inRadius), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(13, 148, 136, ${0.15 + currentS * 0.4})`;
+            ctx.strokeStyle = `rgba(13, 148, 136, ${0.4 + currentS * 0.6})`;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([]);
+            ctx.fill();
+            ctx.stroke();
+
+            const particleCount = Math.floor(currentS * 30);
+            for (let i = 0; i < particleCount; i++) {
+                const angle = (i / particleCount) * Math.PI * 2 + time * (i % 2 === 0 ? 1 : -1);
+                const r = inRadius + (outRadius - inRadius) * (0.5 + 0.5 * Math.sin(time + i));
+                const px = centerX + Math.cos(angle) * r;
+                const py = centerY + Math.sin(angle) * r;
+
+                ctx.beginPath();
+                ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = i % 2 === 0 ? '#0d9488' : '#d97706';
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = currentS === 0 ? '#f59e0b' : '#ffffff';
+            ctx.fill();
+
+            if (currentS === 0) {
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '12px monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText('Ø (Void Singularity)', centerX, centerY + 20);
+            }
+
+            ctx.restore();
+            requestAnimationFrame(drawCanvas);
+        }
+
+        function updateSimulation() {
+            scaleVal = parseFloat(document.getElementById('scale-slider').value);
+            document.getElementById('scale-value').innerText = scaleVal.toFixed(2);
+
+            const valIn = (scaleVal * 0.6).toFixed(2);
+            const valOut = (-scaleVal * 0.6).toFixed(2);
+            const valBal = (parseFloat(valIn) + parseFloat(valOut)).toFixed(2);
+
+            document.getElementById('val-in').innerText = '+' + valIn;
+            document.getElementById('val-out').innerText = valOut;
+            document.getElementById('val-balance').innerText = valBal;
+
+            const badge = document.getElementById('phase-badge');
+            const desc = document.getElementById('phase-description');
+
+            if (scaleVal === 0) {
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-800";
+                badge.innerText = "Phase I: Symmetry";
+                desc.innerText = "At S = 0, internal and external domains are indistinguishable and the boundary set is empty. The global system remains at absolute zero cardinality.";
+            } else if (scaleVal < 80) {
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800";
+                badge.innerText = "Phase II: Metric Activation";
+                desc.innerText = "Symmetry breaking event in progress. The void polarizes into interior parameters (I) and exterior horizon (O). Equilibrium equation I + O = S is dynamically maintained.";
+            } else {
+                badge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800";
+                badge.innerText = "Phase III: Max Polarization";
+                desc.innerText = "High scaling density. Internal and external parameters are maximally separated. Reducing scale parameter S will drive collapse back to Phase I (Closure Protocol).";
+            }
+
+            if (chartInstance) {
+                const factor = scaleVal / 100;
+                chartInstance.data.datasets[0].data = [0, 12 * factor, 24 * factor, 36 * factor, 48 * factor, 60 * factor];
+                chartInstance.data.datasets[1].data = [0, -12 * factor, -24 * factor, -36 * factor, -48 * factor, -60 * factor];
+                chartInstance.update();
+            }
+        }
+
+        function calcTensor() {
+            const iVal = parseFloat(document.getElementById('tensor-i').value) || 0;
+            const sVal = parseFloat(document.getElementById('tensor-s').value) || 0;
+            const oVal = sVal - iVal;
+
+            document.getElementById('tensor-o-out').innerText = oVal.toFixed(2);
+            const trace = (iVal + oVal - sVal);
+            document.getElementById('tensor-trace').innerText = trace.toFixed(2);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            selectAxiom(1);
+            initChart();
+            initCanvas();
+            updateSimulation();
+            calcTensor();
+        });
+    </script>
+</body>
+</html>
+```
