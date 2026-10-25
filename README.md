@@ -1,69 +1,197 @@
-# Zero-Universe Theory ($\mathcal{Z}_0$)
+Zero-Universe Theory (Z₀)
 
-A custom non-well-founded set-theoretic framework designed to natively support the foundational equivalence where **Nothing ($\emptyset$), Everything ($\mathbb{U}$), and Infinity ($\infty$) collapse into a singular Absolute Zero**.
-
-Unlike standard Zermelo-Fraenkel Set Theory with the Axiom of Choice (ZFC), $\mathcal{Z}_0$ bypasses classical structural limitations on universal sets by treating infinity not as an open-ended cardinal progression, but as a closed topological point of closure structurally identical to the empty set.
+A projective-duality framework in which every number is a displacement from 0, 1 is the first finite displacement, and infinity is displacement without a stopping point.
 
 ---
 
-## 🌌 Core Overview
+🌌 Core Overview
 
-The fundamental thesis of the **Zero-Universe Theory** is that the sum of all existence aggregates perfectly to absolute zero. Existence is not an accumulation of mass or data against a backdrop of nothingness; instead, it is a symmetric fluctuation *out* of nothingness. For every manifested set or entity, there exists an inherent, perfectly balanced inverse. When viewed globally, these structures cancel each other out entirely, revealing that the "Sum of All Numbers" is structurally indistinguishable from the void.
+The fundamental thesis of Zero-Universe Theory (Z₀) is that the finite and the infinite are not two separate realms. They are two kinds of displacement from a single origin, 0:
 
----
+· A finite number is a displacement from 0 that has a stopping point. The first such displacement is 1; each finite number n is the n-th completed displacement from 0.
+· Infinity (∞) is displacement from 0 without a stopping point — a limit, not a number.
 
-## 📜 Core Axioms of $\mathcal{Z}_0$
+Therefore 0 is the common reference for the finite and the infinite. Zero is the origin of infinity — not identical to it. The relationship between 0 and ∞ is one of duality, not collapse: they are the two poles of a single coordinate.
 
-The underlying mathematical architecture is defined by four core pillars:
+The geometric realization of this duality is the projective line ℝP¹ = ℝ ∪ {∞}, in which the reciprocal map
 
-### Axiom I: The Axiom of the Void-Absolute (The Core Equivalence)
-$$\emptyset \equiv \mathbb{U}$$
-The empty set (nothing) and the universal set (everything) are the exact same mathematical object viewed from different topological perspectives. This collapses the traditional infinite hierarchy of sets into a perfect circle where the top meets the bottom.
+```
+x ↦ 1/x
+```
 
-### Axiom II: Axiom of Universal Summation
-$$\sum_{x \in \mathbb{U}} x = \emptyset$$
-For every set, number, or entity $x$ that exists within the universe, there exists a perfectly symmetric inverse or "anti-set" $-x$ such that their total combination yields the empty set.
-
-### Axiom III: Axiom of Boundary Complementarity
-$$\{ A_{in} \cup A_{out} \} \setminus \mathbb{S} = \emptyset$$
-"Inside" ($A_{in}$) and "Outside" ($A_{out}$) only possess meaning relative to a specific scale framework ($\mathbb{S}$). When the scale framework itself is extracted, the boundary dissolves, and the distinction between internal and external parameters vanishes, collapsing back into the void ($\emptyset$).
-
-### Axiom IV: Axiom of Infinite Identity (Absolute Zero)
-$$\text{Card}(\mathbb{U}) = \text{Card}(\emptyset) = 0$$
-The cardinality (size) of the Universe/Infinity is structurally identical to Absolute Zero. Infinity acts as a topological point of closure (analogous to the North Pole on a Riemann Sphere), possessing a global magnitude of $0$.
+exchanges 0 and ∞ while fixing 1. The fixed point 1 is the anchor of the finite; the exchanged pair (0, ∞) is the boundary of measurement.
 
 ---
 
-## 🔗 The Equivalence Loop
+📜 Core Axioms of Z₀
 
-By executing these axioms within a non-well-founded universe (replacing ZFC's Axiom of Foundation), the framework natively sustains the core identity without triggering classical contradictions like Russell's or Cantor's paradoxes:
+Axiom I — Reference Duality
 
-$$\{|\emptyset|\} \equiv \text{Absolute Zero} \equiv \mathbb{U} \equiv \{\text{Inside} + \text{Outside} - \text{Scale}\} \equiv \emptyset$$
+There is a distinguished origin 0. Every number — finite or infinite — is a displacement from 0.
 
----
+· A finite number is a displacement with a stopping point. The first such displacement is 1; each finite number n is the n-th completed displacement from 0.
+· Infinity (∞) is displacement from 0 without a stopping point.
 
-## 🔒 Cryptographic Verification Protocol
+Thus 0 is the common reference for the finite and the infinite — the origin of ∞, not identical to it.
 
-To preserve the structural integrity of the framework and prevent asymmetric tampering, all documents in this repository are permanently sealed using the `Z0SignatureScheme v1.0.0` engine.
-
-A file is considered authentic only if its document body, when processed alongside its appended digital signature ($R, S$), balances perfectly back into the Zero-State relative to the author's public identity boundary:
-
-*   **Author:** Christopher Thomas Ronio
-*   **Public Key (Outside_Boundary):** `0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F`
-
-A valid cryptographic stamp mathematically guarantees that the content has not been altered and originates strictly from the corresponding secret private key (**Inside_Boundary**).
+Geometric realization. In the projective line ℝP¹ = ℝ ∪ {∞}, the map x ↦ 1/x exchanges 0 and ∞ while fixing 1. 0 and ∞ are the two poles of a single coordinate. This duality — not identity — is the structural content of Z₀.
 
 ---
 
-## ⚖️ License & Legal Framework
+Axiom II — Displacement Measure
 
-This repository and all its structural assets, axioms, documentation, and conceptual formulations are licensed under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**. 
+For every finite number x, there is a unique displacement d(x) from 0 such that
 
-### What This Means For You:
-*   **You are free to Share:** Copy, redistribute, and transmit this framework in any medium or format.
-*   **You are free to Adapt:** Remix, transform, build upon, and integrate the $\mathcal{Z}_0$ framework into secondary systems (including academic papers, software codebases, and commercial projects).
-*   **Under the condition of Attribution:** You **must** give explicit credit to the original author (**Christopher Thomas Ronio**) and link back to this repository or the core license file. 
+```
+x = 0 + d(x).
+```
 
-For complete legal terms, please review the [LICENSE](LICENSE) file included in this repository.
+Displacement is additive:
 
-***
+```
+d(x + y) = d(x) + d(y),    d(0) = 0.
+```
+
+Infinity is the limit of displacements:
+
+```
+∞ = lim_{n→∞} d(n),
+```
+
+approached but not attained by any finite displacement.
+
+---
+
+Axiom III — Boundary Complementarity
+
+For any scale framework S, let A_in(S) and A_out(S) denote the sets of entities classified as interior and exterior relative to S. Then
+
+```
+A_in(S) ∪ A_out(S) = U_S,
+```
+
+where U_S is the domain visible at scale S. As S is refined (S → finer), the distinction between interior and exterior dissolves:
+
+```
+lim_{S→fine} (A_in(S) ∪ A_out(S)) = U,
+```
+
+and at the projective boundary this limit is the same point as the origin 0.
+
+The distinction between "inside" and "outside" is therefore scale-relative, not absolute. When the scale framework itself is extracted, the distinction vanishes into the origin.
+
+---
+
+Axiom IV — Cardinal Undefinability of ∞
+
+Card(∞) is undefined. Infinity is a limit point, not a set; it has no cardinality in the ordinary sense.
+
+```
+Card(∅) = 0.
+```
+
+The projective magnitude of ∞ is 0 — meaning that in the reciprocal coordinate z = 1/x, the point ∞ corresponds to z = 0, i.e., ∞ sits at the origin of the reciprocal coordinate.
+
+This is the precise form of the intuition that "0 is the reference for infinity": in the right coordinate, ∞ is at 0, without claiming that ∞ has cardinality 0.
+
+---
+
+🔗 The Equivalence Loop
+
+The equivalence loop of Z₀ is the projective involution x ↦ 1/x:
+
+```
+        x ↦ 1/x
+   0  ─────────→  ∞
+   ↑              │
+   │              │
+   └──────────────┘
+        x ↦ 1/x
+
+   (1 is the fixed point: 1 ↦ 1)
+```
+
+Reading. 0 and ∞ are exchanged by the reciprocal map; 1 is the unique positive fixed point. The loop is the cycle 0 → ∞ → 0 under x ↦ 1/x. This is the structural identity that Z₀ formalizes: the finite is anchored at 1, and the boundary of measurement is the dual pair (0, ∞).
+
+---
+
+🧭 Worked Example: The Number 1
+
+Take the first finite displacement, x = 1.
+
+· Additive reading. 1 = 0 + d(1), so d(1) = 1. The number 1 is one completed displacement from the origin.
+· Multiplicative reading. 1 is the multiplicative identity and the unique positive fixed point of x ↦ 1/x. It is the anchor of the finite.
+· Projective reading. In ℝP¹, 1 is the point equidistant (in the projective coordinate) from the dual pair (0, ∞). It does not move under the reciprocal involution.
+· Boundary reading. The limits x → 0 and x → ∞ both approach the same boundary of the projective line, but from opposite directions. 1 is the interior marker from which both limits are measured.
+
+Under Z₀, 1 is the first finite number, and it is defined by its displacement from 0 — not as a free-standing unit, but as the first completed measurement from the origin.
+
+---
+
+🔒 Symbolic Sealing Protocol
+
+Note. The protocol below is symbolic, not cryptographic. It is a conceptual seal, not a security guarantee. For a real signature scheme, use Ed25519 or ECDSA with documented key generation.
+
+The documents in this repository carry a symbolic seal under the Z0Seal v1.0.0 convention. A document is considered "sealed" if its content, when read alongside the author's identity boundary, is consistent with the reference-duality reading of Z₀.
+
+· Author: Christopher Thomas Ronio
+· Identity boundary (symbolic): 0x… (placeholder; not a public key)
+
+A sealed document is a conceptual stamp, not a verifiable signature. It marks the document as belonging to the Z₀ framework; it does not certify integrity or origin in any cryptographic sense.
+
+---
+
+⚖️ License & Legal Framework
+
+This repository and all its structural assets, axioms, documentation, and conceptual formulations are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+What This Means For You
+
+· Share. Copy, redistribute, and transmit this framework in any medium or format.
+· Adapt. Remix, transform, build upon, and integrate the Z₀ framework into secondary systems (including academic papers, software codebases, and commercial projects).
+· Attribute. You must give explicit credit to the original author (Christopher Thomas Ronio) and link back to this repository or the core license file.
+
+For complete legal terms, please review the LICENSE file included in this repository.
+
+---
+
+📁 Repository Structure
+
+```
+.github/workflows/   CI configuration
+docs/                Extended notes and algebraic properties
+examples/            Worked examples and scripts
+html/                Rendered HTML version of the framework
+scripts/             Helper scripts
+framework.md         Extended framework notes
+zfc_blueprint.md     Comparison with ZFC (for reference only)
+sign_workspace.py    Symbolic sealing helper
+index.html           Landing page
+README.md            This document
+LICENSE              CC BY 4.0
+```
+
+---
+
+🧩 Status & Scope
+
+What Z₀ is. A projective-duality framework in which 0 is the common origin of the finite and the infinite, 1 is the first finite displacement, and ∞ is displacement without a stopping point. It is a geometry and philosophy of measurement, formalized in the projective line ℝP¹.
+
+What Z₀ is not. It is not a new set theory. It does not assert that the empty set is identical to the universal set. It does not claim that "the sum of all existence is zero" in any set-theoretic sense. It does not provide a cryptographic verification scheme.
+
+Open questions.
+
+1. Can the scale-refinement limit in Axiom III be made explicit for specific scale frameworks S?
+2. Does the projective-duality reading extend cleanly to the complex projective line ℂP¹ (the Riemann sphere), and if so, what does the fixed-point structure of z ↦ 1/z look like there?
+3. Can "displacement without a stopping point" be given a constructive (rather than limit-based) definition, e.g., in a non-Archimedean or surreal setting?
+
+---
+
+📜 One-Sentence Summary
+
+Zero-Universe Theory states that 0 is the common reference for the finite and the infinite, 1 is the first finite displacement from 0, and infinity is displacement from the same origin without a stopping point — a projective duality, not a collapse.
+
+---
+
+Christopher Thomas Ronio — Zero-Universe Theory (Z₀)
+Licensed under CC BY 4.0.
