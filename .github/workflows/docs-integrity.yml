@@ -1,0 +1,42 @@
+name: Docs Integrity
+
+on:
+  push:
+    paths:
+      - 'docs/**.md'
+      - 'docs/INDEX.md'
+  pull_request:
+    paths:
+      - 'docs/**.md'
+
+jobs:
+  check-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify every file listed in docs/INDEX.md exists
+        run: |
+          set -e
+          missing=0
+          # Extract relative markdown links of the form [text](path.md)
+          grep -oP '\]\(\K[^)]+\.md' docs/INDEX.md | sort -u | while read -r f; do
+            # Resolve relative to docs/
+            target="docs/$f"
+            if [ ! -f "$target" ]; then
+              echo "MISSING: $target (referenced in docs/INDEX.md)"
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            echo "Index references missing files."
+            exit 1
+          fi
+          echo "All files referenced in docs/INDEX.md exist."
+
+      - name: Check markdown links resolve
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          folder-path: 'docs'
+          file-extension: '.md'
